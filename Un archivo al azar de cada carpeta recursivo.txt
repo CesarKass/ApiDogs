@@ -1,0 +1,54 @@
+<?php
+header('Content-Type: application/json'); 
+$ruta="G:/ejemplo";
+//variable guarda nombre de la carpeta
+$nombreCarpeta="vacio";
+$i = 0;
+$fic;
+
+function unArchivoAleatorioDeCadaCarpeta($ruta,$nombreCarpeta){
+    $GLOBALS["pila"] = array();
+    $directorio = opendir($ruta); //ruta actual
+    while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+    {
+        if (is_dir($ruta."/".$archivo))//verificamos si es o no un directorio
+        {
+            if ($archivo != "." && $archivo != "..") {
+               // echo "</br>";
+               // echo "----------------------------------------------------------";
+              //  echo "</br>";
+             //   echo $archivo ;
+             //  echo "</br>";
+             //   echo $ruta."/".$archivo;
+             //  echo "</br>";
+                unArchivoAleatorioDeCadaCarpeta($ruta."/".$archivo,$archivo);
+             //  echo "</br>";
+              //  echo "</br>";
+            }
+        }else{
+           // echo"archivo: ". $archivo;
+          // echo "</br>";
+            array_push($GLOBALS["pila"], $archivo);
+        }
+        
+    }
+  //  echo "</br>";
+    $GLOBALS["fic"][$GLOBALS["i"]] = array($nombreCarpeta=> $GLOBALS["pila"] [array_rand($GLOBALS["pila"])]);
+    //borramos el "primer" array
+    $search_array=$GLOBALS["fic"][$GLOBALS["i"]];
+    if(array_key_exists('vacio',$search_array)){
+        unset($GLOBALS["fic"][$GLOBALS["i"]]);
+    }
+    else{
+    //   print_r($GLOBALS["fic"][$GLOBALS["i"]]);
+     // echo "</br>";
+        $GLOBALS["i"]++;
+    }
+  //  echo "</br>";
+  //  echo "----------------------------------------------------------";
+  // echo "</br>";
+}
+
+unArchivoAleatorioDeCadaCarpeta($ruta,$nombreCarpeta);
+print_r(json_encode($fic,JSON_PRETTY_PRINT)); 
+

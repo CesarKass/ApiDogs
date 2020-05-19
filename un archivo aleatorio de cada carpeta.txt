@@ -1,0 +1,45 @@
+$ruta="G:/ejemplo/";
+$pila = array();
+$i = 0;
+$auxArchivo="";
+$directorio = opendir($ruta); //ruta actual
+while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+{
+    if (!is_dir($archivo))//verificamos si es o no un directorio
+    {
+        echo "</br>------------------------------------------------</br>";
+        echo $archivo ;
+        echo "</br>";
+        $auxArchivo=$archivo;
+        $directorio1 = opendir($ruta.$archivo);
+        echo "directorio ";
+        print_r($ruta.$archivo);
+        echo "</br>------------------------------------------------</br>";
+        
+             while ($archivo = readdir($directorio1 )) //obtenemos un archivo y luego otro sucesivamente
+             {
+               if (is_dir($ruta.$archivo))//verificamos si es o no un directorio
+               {
+                // echo "[".$archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
+              }
+              else
+              {
+                if (is_dir($directorio1.$archivo))//verificamos si es o no un directorio
+                {
+                 // echo "[".$archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
+               }
+                echo $archivo ;
+                echo "</br>";
+                array_push($pila, $archivo);
+              }
+        }
+        $fic[$i] = array( $auxArchivo =>$pila[array_rand($pila)]);
+        print_r($fic[$i]);
+        echo "</br>";
+        echo "</br>";
+        $i++;
+        $pila = array();
+    }
+}
+echo "</br>";
+print_r(json_encode($fic)); 

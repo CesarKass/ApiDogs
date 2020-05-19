@@ -1,0 +1,1 @@
+select mascota.idMascota, NombreMascota, EdadMascota, NombreRaza,NombreImagen,megusta from mascota inner join razas on mascota.idRaza=razas.idRaza inner join imagenesmascota as im on mascota.idMascota=im.idMascota
