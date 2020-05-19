@@ -16,6 +16,11 @@ $pila1= array();
 $host= gethostname();
 $ip = gethostbyname($host);
 
+
+
+//-------------------------------------------------------------------------------
+
+
 //Una imagen de cada carpeta
 $app->get('/OneDogOfEachBreed', function (Request $request, Response $response) {
     unArchivoAleatorioDeCadaCarpeta($GLOBALS["ruta"],$GLOBALS["nombreCarpeta"]);
@@ -47,6 +52,11 @@ function unArchivoAleatorioDeCadaCarpeta($ruta,$nombreCarpeta){
 //Fin Una imagen de cada carpeta
 
 
+
+//-------------------------------------------------------------------------------
+
+
+
 //Una imagen de todas las carpetas
 $app->get('/OneDogRandom', function (Request $request, Response $response) {
     unPerroRandom($GLOBALS["ruta"],$GLOBALS["nombreCarpeta"]);
@@ -75,6 +85,12 @@ function unPerroRandom($ruta,$nombreCarpeta){
 //Fin Una imagen de todas las carpetas
 
 
+
+//-------------------------------------------------------------------------------
+
+
+
+//Una imagen aleatoria de una raza
 $app->get('/OneDogRandomOfOneBreed/{DogBreed}', function (Request $request, Response $response) {
     $GLOBALS["nombreCarpeta"] = $request->getAttribute('DogBreed');
     unPerroRandomDeUnaRaza($GLOBALS["ruta"],$GLOBALS["nombreCarpeta"]);
@@ -101,3 +117,4 @@ function unPerroRandomDeUnaRaza($ruta,$nombreCarpeta){
         }
     }
 }
+//Fin Una imagen aleatoria de una raza
